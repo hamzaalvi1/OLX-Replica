@@ -1,4 +1,8 @@
-
+* {
+    box-sizing: "border-box";
+    margin: 0;
+    padding: 0;
+  }
 .brand-Nav{
     background: url("../src/Assets/bg_pk.jpg");
     background-position: center center;

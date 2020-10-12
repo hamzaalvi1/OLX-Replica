@@ -1,9 +1,10 @@
 import React from "react"
 
-import Grid from '@material-ui/core/Grid';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
 const useStyles = makeStyles((theme) => ({
 
    allCategories:{
@@ -27,9 +28,14 @@ const useStyles = makeStyles((theme) => ({
    
    listItem:{
      display: "flex",
-     justifyContent: "space-between",
+     justifyContent: "space-evenly",
      alignItems: "center",
-   }
+   },
+   listItemPara:{
+   marginLeft:"4ch",
+   cursor:"pointer",
+   fontSize: "15px"
+  },
   }));
 const AllCategories = ()=>{
    const classes = useStyles()
@@ -38,10 +44,8 @@ const AllCategories = ()=>{
     selectCity(event.target.value);
   };    
     return(
-        <div >
-        <Grid container spacing = {2}  
-        alignItems="center" justify= "center">
-          <Grid item xs = {2} md= {2} lg={2} sm ={2}>
+        <div style = {{display: "flex",justifyContent: "between"}} >
+ 
           <NativeSelect className = {classes.allCategories}
           IconComponent = {KeyboardArrowDownIcon}        
           value={city}
@@ -54,19 +58,12 @@ const AllCategories = ()=>{
           <option value={20}>Twenty</option>
           <option value={30}>Thirty</option>
         </NativeSelect>
-      </Grid>    
-      <Grid item  xs ={9} md = {9} lg = {9} sm ={9}>
-      <div className = {classes.listItem}>
-          <p>Mobile Phones</p>
-          <p>Cars</p>
-          <p>Motorcycles</p>
-          <p>Houses</p>
-          <p>TV-Video-Audio</p>
-          <p>Tablets</p>
-          <p>Lands & Plots</p>
+        
+       <div className = {classes.listItem}>
+          {["Mobile Phones","Cars","Motorcycle","Houses","TV-Video-Audio","Tablets","Lands & Plots"].map((item)=>{
+            return <Typography variant = "body2"  className = {classes.listItemPara}index = {item}>{item}</Typography>
+          })}
         </div>
-        </Grid>
-        </Grid>
         </div>
     )
 }
