@@ -1,0 +1,186 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
+import ChatBubble from '@material-ui/icons/ChatBubble';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import IconButton from '@material-ui/core/IconButton';
+
+const useStyles = makeStyles((theme) => ({
+
+  title:{
+      color: "#003034",
+      fontWeight:"bolder",
+      fontSize: "25px",
+      fontStyle: "italic",
+      marginRight: theme.spacing(2)   
+  },
+  select:{
+      width: "25ch",
+      padding: theme.spacing(1),
+      color: "grey",
+     "& .MuiNativeSelect-icon": {
+       color: "#003034",
+       fontSize: "30px",
+      },
+      "&&&:before": {
+        borderBottom: "none"
+      },
+      "&&:after": {
+        borderBottom: "none"
+      }
+      
+   
+  },
+  
+  selectParent:{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "2px solid #003034",
+    borderRadius: theme.shape.borderRadius,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(3),
+    width: "29ch",
+    backgroundColor: "white"
+   },
+  
+  inputInput: {
+    padding: theme.spacing(1.5),
+    width: "60ch",
+    color: "#003034"
+   
+  },
+ 
+  search: {
+    display: "flex",
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: "white",
+    '&:hover': {
+      backgroundColor: "white",
+    },
+    marginLeft: 0,
+    width: "auto",
+    border: "2px solid #003034",
+   
+    "&:focus":{
+      outline:"none"   
+    }
+  },
+  searchIcon:{
+    backgroundColor: "#003034",    
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(0.8),
+    
+  },
+  notifyIcons: {
+    color:"#003034",
+    fontSize: "32px",
+    
+  },
+  
+ 
+  sellButton:{
+    color: "#003034",
+    fontWeight: "Bolder",
+    fontSize: "15px",
+    width: "13ch",
+    borderRadius: "4ch",
+    backgroundColor: "white",
+    border: "5px solid",
+    borderLeftColor: "yellow",
+    borderBottomColor: "yellow",
+    borderRightColor: "#3977fe",
+    borderTopColor: "#3977fe",
+    marginLeft: theme.spacing(2),
+    '&:hover': {
+      backgroundColor: "#f7f9f8",
+    }
+  },
+ 
+}));
+
+const Navbar = ()=>  {
+  const classes = useStyles();
+  const [city, selectCity] = React.useState('');
+  const handleChange = (event) => {
+    selectCity(event.target.value);
+  };
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" style = {{backgroundColor: "#f7f9f8",height: "75px"}}> 
+      <div style={{display:"flex",justifyContent:"space-evenly",alignItems: "center",height: "70px"}}>
+        <Toolbar>
+              
+          <Typography variant="h5" className = {classes.title}>
+            OLX
+          </Typography>
+         <div className = {classes.selectParent}>
+        <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
+        <NativeSelect className = {classes.select}
+          IconComponent = {KeyboardArrowDownIcon}        
+          value={city}
+          onChange={handleChange}
+        >
+          <option value="" disabled>
+                  Search City.......
+          </option>
+          <option value={10}>Ten</option>
+          <option value={20}>Twenty</option>
+          <option value={30}>Thirty</option>
+        </NativeSelect> 
+        </div> 
+          <div className={classes.search}>
+                               
+            <InputBase
+              placeholder="Find Cars,Mobile Phones and more...."
+              classes={{
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+            <div className = {classes.searchIcon}>
+           <SearchIcon style = {{color: "#f7f9f8"}}fontSize = "large"/>
+           </div> 
+        
+          </div>
+          <div style={{marginLeft: "22px"}}>         
+          <IconButton   >
+                <ChatBubble className = {classes.notifyIcons}  />
+            </IconButton>
+            <IconButton  >
+                <NotificationsIcon className = {classes.notifyIcons} />
+            </IconButton>
+            <IconButton  >
+                <AccountCircleIcon className = {classes.notifyIcons} />
+            </IconButton>
+            
+            <Button
+            startIcon = {<AddIcon/>}
+           variant="contained"
+           color="primary"
+           className = {classes.sellButton}
+          >SELL</Button>
+          </div>
+   
+        </Toolbar>
+        </div>
+      </AppBar>
+      
+        </div>
+       
+
+  );
+}
+export default Navbar
