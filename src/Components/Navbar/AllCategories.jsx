@@ -61,7 +61,7 @@ const AllCategories = ()=>{
         
        <div className = {classes.listItem}>
           {["Mobile Phones","Cars","Motorcycle","Houses","TV-Video-Audio","Tablets","Lands & Plots"].map((item)=>{
-            return <Typography variant = "body2"  className = {classes.listItemPara}index = {item}>{item}</Typography>
+            return <Typography variant = "body2"  className = {classes.listItemPara} key = {item}>{item}</Typography>
           })}
         </div>
         </div>

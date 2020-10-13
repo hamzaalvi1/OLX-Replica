@@ -4,6 +4,8 @@ import Navbar from "./Components/Navbar/Navbar"
 import AllCategories from "./Components/Navbar/AllCategories"
 import BrandImage from "./Components/Navbar/Brand"
 import BrandFooter from "./Components/Footer/Brand-Footer"
+import FooterNavigation from "./Components/Footer/Footer-Navigation"
+
 
 
 
@@ -14,6 +16,7 @@ function App() {
      <AllCategories/>
      <BrandImage/>
      <BrandFooter/>
+     <FooterNavigation/>
     </div>
   );
 }
