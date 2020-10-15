@@ -4,7 +4,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
+import {Link} from "react-router-dom"
 const useStyles = makeStyles((theme) => ({
 
    allCategories:{
@@ -60,8 +60,12 @@ const AllCategories = ()=>{
         </NativeSelect>
         
        <div className = {classes.listItem}>
-          {["Mobile Phones","Cars","Motorcycle","Houses","TV-Video-Audio","Tablets","Lands & Plots"].map((item)=>{
-            return <Typography variant = "body2"  className = {classes.listItemPara} key = {item}>{item}</Typography>
+          {["Mobile Phones","Electronics","Vehicles","Houses","TV-Video-Audio","Pets","Lands & Plots"].map((item)=>{
+            return <Typography variant = "body2"  className = {classes.listItemPara} key = {item}>
+              <Link to = {`/${item}`}>
+              {item}
+              </Link>
+              </Typography>
           })}
         </div>
         </div>

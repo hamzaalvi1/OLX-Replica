@@ -9,3 +9,10 @@
     height: 40vh;
     background-repeat: no-repeat;
 }
+a {
+  text-decoration: none;
+  color: #003034
+}
+a:hover{
+  color: blueviolet
+}
