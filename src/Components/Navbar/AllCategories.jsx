@@ -5,10 +5,11 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {Link} from "react-router-dom"
+import MenuItems from "../Menu.json"
 const useStyles = makeStyles((theme) => ({
 
    allCategories:{
-    width: "20ch", 
+    width: "22ch", 
     padding: theme.spacing(1),
    "& .MuiNativeSelect-icon": {
      color: "black",
@@ -39,24 +40,25 @@ const useStyles = makeStyles((theme) => ({
   }));
 const AllCategories = ()=>{
    const classes = useStyles()
-   const [city, selectCity] = React.useState('');
-  const handleChange = (event) => {
-    selectCity(event.target.value);
+   const [menuItem, setMenuItem] = React.useState('');
+  const menuHandleChange = (event) => {
+    setMenuItem(event.target.value);
   };    
     return(
         <div style = {{display: "flex",justifyContent: "between"}} >
  
           <NativeSelect className = {classes.allCategories}
           IconComponent = {KeyboardArrowDownIcon}        
-          value={city}
-          onChange={handleChange}
+          value={menuItem}
+          onChange={menuHandleChange}
         >
           <option value="" disabled>
                   ALL CATEGORIES
           </option>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
+          {MenuItems.map((menu)=> <option key = {menu.id}>
+           
+             {menu.title} 
+          </option>)}
         </NativeSelect>
         
        <div className = {classes.listItem}>

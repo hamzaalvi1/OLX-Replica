@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   
   inputInput: {
     padding: theme.spacing(1.5),
-    width: "60ch",
+    width: "50ch",
     color: "#003034"
    
   },
