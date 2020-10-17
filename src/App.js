@@ -8,6 +8,7 @@ import FooterNavigation from "./Components/Footer/Footer-Navigation"
 import Footer from "./Components/Footer/Footer"
 import RouteConfig from "./Components/RouterConfig/RouteConfig"
 import {BrowserRouter as Router} from "react-router-dom"
+import {GlobalProvider} from "./Components/Context/GlobalState"
 
 
 
@@ -15,6 +16,7 @@ import {BrowserRouter as Router} from "react-router-dom"
 
 function App() {
   return (
+    <GlobalProvider>
     <Router>
     <div className="App">
          <Navbar/>
@@ -27,7 +29,7 @@ function App() {
 
     </div>
     </Router>
-
+    </GlobalProvider>
   );
 }
 

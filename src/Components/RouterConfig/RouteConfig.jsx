@@ -2,12 +2,16 @@ import React from "react"
 import {Switch,Route} from "react-router-dom"
 import AllSellItems from "../Pagination/AllSellItems"
 import Electronics from "../Pagination/Electronics"
-import Houses from "../Pagination/Houses"
-import LandsAndPlots from "../Pagination/Lands&Plots"
+import Property from "../Pagination/Property"
+import Furnitures from "../Pagination/Furnitures"
 import Mobile_Phones from "../Pagination/Mobile-Phones"
 import Pets from "../Pagination/Pets"
-import TV_Audio from "../Pagination/TV-Audio"
+import FashionsAndBeauty from "../Pagination/FashionsAndBeauty"
 import Vehicles from "../Pagination/Vechiles"
+import BooksAndSports from "../Pagination/BooksAndSports"
+import Kids from "../Pagination/Kids"
+
+
 
 
 
@@ -20,12 +24,16 @@ const RouteConfig  = ()=>{
          <Switch>   
           <Route exact path = "/" component = {AllSellItems} />
           <Route  path = "/Electronics" component = {Electronics} />
-          <Route  path = "/Houses" component = {Houses} />
-          <Route  path = {`/Lands & Plots`} component ={LandsAndPlots} />
-          <Route  path = "/Mobile Phones" component = {Mobile_Phones} />
-          <Route  path = "/TV-Video-Audio" component = {TV_Audio} />
+          <Route  path = "/Property" component = {Property} />
+          <Route  path = "/Furnitures" component ={Furnitures} />
+          <Route  path = "/Mobiles" component = {Mobile_Phones} />
+          <Route  path = {`/Fashion&Beauty`} component = {FashionsAndBeauty} />
           <Route  path = "/Pets" component = {Pets} />
           <Route  path = "/Vehicles" component = {Vehicles} />
+          <Route  path = {`/Books&Hobbies`} component ={BooksAndSports} />
+          <Route  path = "/Kids" component ={Kids} />
+
+
 
 
 

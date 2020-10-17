@@ -1,11 +1,11 @@
 import React from "react"
 import { Typography } from "@material-ui/core"
 
-const LandandPlots = ()=>{
+const FashionsAndBeauty = ()=>{
     return(
         <div>
-            <Typography>Land and Plots</Typography>
+            <Typography>FashionsAndBeauty</Typography>
         </div>
     )
 }
-export default LandandPlots
+export default FashionsAndBeauty

@@ -1,11 +1,11 @@
 import React from "react"
 import { Typography } from "@material-ui/core"
 
-const Houses = ()=>{
+const Books = ()=>{
     return(
         <div>
-            <Typography>Houses</Typography>
+            <Typography>Books sports & hobbies</Typography>
         </div>
     )
 }
-export default Houses
+export default Books
