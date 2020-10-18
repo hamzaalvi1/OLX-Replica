@@ -7,30 +7,30 @@ import BrandFooter from "./Components/Footer/Brand-Footer"
 import FooterNavigation from "./Components/Footer/Footer-Navigation"
 import Footer from "./Components/Footer/Footer"
 import RouteConfig from "./Components/RouterConfig/RouteConfig"
-import {BrowserRouter as Router} from "react-router-dom"
 import {GlobalProvider} from "./Components/Context/GlobalState"
 
+import {withRouter} from "react-router-dom"
 
 
 
 
-function App() {
+
+function App(props) {
   return (
     <GlobalProvider>
-    <Router>
     <div className="App">
-         <Navbar/>
-          <AllCategories/>
-          <BrandImage/>
+          <Navbar/>   
+          {props.location.pathname !== "/AdCreator" ? <AllCategories/> : null}
+          {props.location.pathname !== "/AdCreator" ? <BrandImage/> : null}
           <RouteConfig/>
-          <BrandFooter/>
-          <FooterNavigation/>
+          {props.location.pathname !== "/AdCreator" ? <BrandFooter/>: null}
+          {props.location.pathname !== "/AdCreator" ?<FooterNavigation/>:null}
           <Footer/> 
 
     </div>
-    </Router>
     </GlobalProvider>
+
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -10,7 +10,7 @@ import FashionsAndBeauty from "../Pagination/FashionsAndBeauty"
 import Vehicles from "../Pagination/Vechiles"
 import BooksAndSports from "../Pagination/BooksAndSports"
 import Kids from "../Pagination/Kids"
-
+import AdCreator from "../AdCreator/AdCreator"
 
 
 
@@ -32,7 +32,7 @@ const RouteConfig  = ()=>{
           <Route  path = "/Vehicles" component = {Vehicles} />
           <Route  path = {`/Books&Hobbies`} component ={BooksAndSports} />
           <Route  path = "/Kids" component ={Kids} />
-
+          <Route path = "/AdCreator" component = {AdCreator}/> 
 
 
 

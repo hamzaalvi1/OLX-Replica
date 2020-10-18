@@ -13,7 +13,7 @@ import ChatBubble from '@material-ui/icons/ChatBubble';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
-
+import {useHistory,useLocation} from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
 
   title:{
@@ -112,7 +112,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = ()=>  {
+  const history = useHistory()
   const classes = useStyles();
+  const location = useLocation()
+  console.log(location)
   const [city, selectCity] = React.useState('');
   const handleChange = (event) => {
     selectCity(event.target.value);
@@ -126,6 +129,7 @@ const Navbar = ()=>  {
           <Typography variant="h5" className = {classes.title}>
             OLX
           </Typography>
+          { location.pathname !== "/AdCreator" ?
          <div className = {classes.selectParent}>
         <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
         <NativeSelect className = {classes.select}
@@ -140,7 +144,8 @@ const Navbar = ()=>  {
           <option value={20}>Twenty</option>
           <option value={30}>Thirty</option>
         </NativeSelect> 
-        </div> 
+          </div> : null }
+           {location.pathname !== "/AdCreator" ?
           <div className={classes.search}>
                                
             <InputBase
@@ -155,6 +160,8 @@ const Navbar = ()=>  {
            </div> 
         
           </div>
+          :null}
+          {location.pathname !== "/AdCreator" ?
           <div style={{marginLeft: "22px"}}>         
           <IconButton   >
                 <ChatBubble className = {classes.notifyIcons}  />
@@ -166,14 +173,14 @@ const Navbar = ()=>  {
                 <AccountCircleIcon className = {classes.notifyIcons} />
             </IconButton>
             
-            <Button
+            <Button onClick = {()=> history.push("/AdCreator")}
             startIcon = {<AddIcon/>}
            variant="contained"
            color="primary"
            className = {classes.sellButton}
           >SELL</Button>
           </div>
-   
+           : null}
         </Toolbar>
         </div>
       </AppBar>
