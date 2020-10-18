@@ -14,6 +14,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import {useHistory,useLocation} from "react-router-dom";
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 const useStyles = makeStyles((theme) => ({
 
   title:{
@@ -49,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(3),
-    width: "29ch",
+    width: "33ch",
     backgroundColor: "white"
    },
   
   inputInput: {
     padding: theme.spacing(1.5),
-    width: "50ch",
+    width: "55ch",
     color: "#003034"
    
   },
@@ -89,7 +90,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "32px",
     
   },
-  
+  backBtn: {
+    color:"#003034",
+    fontSize: "30px",
+    marginRight: "12px",
+    marginLeft: "5px"
+  },
  
   sellButton:{
     color: "#003034",
@@ -116,16 +122,22 @@ const Navbar = ()=>  {
   const classes = useStyles();
   const location = useLocation()
   console.log(location)
+  const mainToolbarStyling = {display:"flex",justifyContent:"space-evenly",alignItems: "center",height: "70px"} 
   const [city, selectCity] = React.useState('');
   const handleChange = (event) => {
     selectCity(event.target.value);
   };
   return (
     <div className={classes.root}>
-      <AppBar position="static" style = {{backgroundColor: "#f7f9f8",height: "75px"}}> 
-      <div style={{display:"flex",justifyContent:"space-evenly",alignItems: "center",height: "70px"}}>
+      <AppBar position="static" style = {{backgroundColor: "#f7f9f8",height: "70px"}}> 
+      <div style={location.pathname !== "/AdCreator" ? mainToolbarStyling : null}>
+      
         <Toolbar>
-              
+        {location.pathname === "/AdCreator" ?
+          <div>
+          <IconButton onClick = {()=>history.push("/")}>
+          <KeyboardBackspaceIcon className = {classes.backBtn} />
+          </IconButton></div> : null}        
           <Typography variant="h5" className = {classes.title}>
             OLX
           </Typography>
