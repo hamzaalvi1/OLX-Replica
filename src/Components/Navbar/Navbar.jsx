@@ -50,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(3),
-    width: "33ch",
+    width: "28ch",
     backgroundColor: "white"
    },
   
   inputInput: {
     padding: theme.spacing(1.5),
-    width: "55ch",
+    width: "50ch",
     color: "#003034"
    
   },
