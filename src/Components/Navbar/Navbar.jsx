@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import Button from '@material-ui/core/Button';
@@ -15,6 +14,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import {useHistory,useLocation} from "react-router-dom";
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import OLXlogo from "../../Assets/OLX.png"
 const useStyles = makeStyles((theme) => ({
 
   title:{
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     border: "2px solid #003034",
     borderRadius: theme.shape.borderRadius,
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     width: "28ch",
     backgroundColor: "white"
@@ -121,7 +121,6 @@ const Navbar = ()=>  {
   const history = useHistory()
   const classes = useStyles();
   const location = useLocation()
-  console.log(location)
   const mainToolbarStyling = {display:"flex",justifyContent:"space-evenly",alignItems: "center",height: "70px"} 
   const [city, selectCity] = React.useState('');
   const handleChange = (event) => {
@@ -138,9 +137,7 @@ const Navbar = ()=>  {
           <IconButton onClick = {()=>history.push("/")}>
           <KeyboardBackspaceIcon className = {classes.backBtn} />
           </IconButton></div> : null}        
-          <Typography variant="h5" className = {classes.title}>
-            OLX
-          </Typography>
+          <img src = {OLXlogo} style = {{cursor: "pointer"}} width ="50px" alt = "olx" onClick = {()=>history.push("/")}/>
           { location.pathname !== "/AdCreator" ?
          <div className = {classes.selectParent}>
         <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
