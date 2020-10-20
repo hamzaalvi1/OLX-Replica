@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar"
 import AllCategories from "./Components/Navbar/AllCategories"
@@ -7,7 +7,7 @@ import BrandFooter from "./Components/Footer/Brand-Footer"
 import FooterNavigation from "./Components/Footer/Footer-Navigation"
 import Footer from "./Components/Footer/Footer"
 import RouteConfig from "./Components/RouterConfig/RouteConfig"
-import {GlobalProvider} from "./Components/Context/GlobalState"
+import {GlobalContext} from "./Components/Context/GlobalState"
 
 import {withRouter} from "react-router-dom"
 
@@ -16,19 +16,20 @@ import {withRouter} from "react-router-dom"
 
 
 function App(props) {
+  const gblContext = useContext(GlobalContext)
+  const {isCategory} = gblContext
   return (
-    <GlobalProvider>
+    
     <div className="App">
           <Navbar/>   
-          {props.location.pathname !== "/AdCreator" ? <AllCategories/> : null}
-          {props.location.pathname !== "/AdCreator" ? <BrandImage/> : null}
+          {props.location.pathname !== "/AdCreator" && props.location.pathname !== `/AdCreator/${isCategory}`  ? <AllCategories/> : null}
+          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${isCategory}` ? <BrandImage/> : null}
           <RouteConfig/>
-          {props.location.pathname !== "/AdCreator" ? <BrandFooter/>: null}
-          {props.location.pathname !== "/AdCreator" ?<FooterNavigation/>:null}
+          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${isCategory}` ? <BrandFooter/>: null}
+          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${isCategory}` ?<FooterNavigation/>:null}
           <Footer/> 
 
     </div>
-    </GlobalProvider>
 
   );
 }

@@ -3,10 +3,10 @@ import MenuList from "../Menu.json"
 export const GlobalContext = createContext()
 
 export const GlobalProvider = ({children})=>{
-const [isAdCreator,setIsAdCreator] = useState(false)
+const [isCategory,setIsCategory] = useState(null)
 
     return(
-        <GlobalContext.Provider value = {{MenuList,isAdCreator,setIsAdCreator}}>
+        <GlobalContext.Provider value = {{MenuList,isCategory,setIsCategory}}>
          {children}
         </GlobalContext.Provider>
     )

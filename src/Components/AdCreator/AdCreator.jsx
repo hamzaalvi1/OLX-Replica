@@ -29,7 +29,7 @@ const AdCreator  = ()=>{
     const gblContext = useContext(GlobalContext)
     const {MenuList} = gblContext
     const classes = useStyles();
-  
+   
     const handleClick = (menuPath) => {
        history.push(`/AdCreator/${menuPath}`)
     };

@@ -11,6 +11,7 @@ import Vehicles from "../Pagination/Vechiles"
 import BooksAndSports from "../Pagination/BooksAndSports"
 import Kids from "../Pagination/Kids"
 import AdCreator from "../AdCreator/AdCreator"
+import AdFormCreator from "../AdCreator/AdFormCreator"
 
 
 
@@ -32,7 +33,9 @@ const RouteConfig  = ()=>{
           <Route  path = "/Vehicles" component = {Vehicles} />
           <Route  path = {`/Books&Hobbies`} component ={BooksAndSports} />
           <Route  path = "/Kids" component ={Kids} />
-          <Route path = "/AdCreator" component = {AdCreator}/> 
+          <Route path = "/AdCreator" exact component = {AdCreator}/> 
+          <Route path = "/AdCreator/:category" component = {AdFormCreator}/> 
+
 
 
 
