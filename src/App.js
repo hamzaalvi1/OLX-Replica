@@ -20,7 +20,7 @@ function App(props) {
   const {isCategory} = gblContext
   return (
     
-    <div className="App">
+    <div className="App" >
           <Navbar/>   
           {props.location.pathname !== "/AdCreator" && props.location.pathname !== `/AdCreator/${isCategory}`  ? <AllCategories/> : null}
           {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${isCategory}` ? <BrandImage/> : null}
