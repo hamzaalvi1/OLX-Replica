@@ -143,7 +143,7 @@ const Navbar = ()=>  {
           <img src = {OLXlogo} style = {{cursor: "pointer"}} width ="50px" alt = "olx" onClick = {()=>history.push("/")}/>
           { location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${isCategory}` ?
          <div className = {classes.selectParent}>
-        <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
+         <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
         <NativeSelect className = {classes.select}
           IconComponent = {KeyboardArrowDownIcon}        
           value={city}

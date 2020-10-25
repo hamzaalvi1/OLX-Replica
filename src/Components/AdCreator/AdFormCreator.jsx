@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from "react"
+import React,{useContext,useEffect,useState} from "react"
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {GlobalContext} from "../Context/GlobalState"
 import {useParams} from "react-router-dom"
@@ -11,6 +11,8 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import IconButton from "@material-ui/core/IconButton"
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
+import {FireStore} from "../FireBase/firebase"
+
 
 const BootstrapInput = withStyles((theme) => ({
     
@@ -116,10 +118,42 @@ const AdFormCreator = ()=>{
     const {setIsCategory,MenuList} = gblContext
     const params = useParams()
     const {category} = params
-    const [age, setAge] = React.useState('');
-    const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+    const photoHandler =(evt)=>{
+      evt.persist();
+      let reader = new FileReader();
+      let file = evt.target.files[0];   
+      reader.onloadend = ()=>{
+        setAdCreatorData({...adCreatorData,[evt.target.name]:file.name})
+      }    
+     reader.readAsDataURL(file)
+    }
+   const onAdCreatorDataSubmit = (evt) => {
+     evt.preventDefault()
+     if(adCreatorData.title !== "" || adCreatorData.description !== "" || adCreatorData.price !== "" || adCreatorData.username !== ""
+       || adCreatorData.phoneNumber !== "" || adCreatorData.location !== "" || adCreatorData.itemCategory !== "" ){
+        console.log(adCreatorData)
+        FireStore.collection("ads").add(adCreatorData)
+        .then((docRef)=> console.log(docRef))
+        .catch((err)=> console.log(err))
+        setAdCreatorData({title: "",description: "",price: "",username: "",phoneNumber:"",itemCategory: "",location:""})
+       
+       }
+       else{
+         alert("All Fields are mandatory please fill all fields")
+       }
+      }
+  const [adCreatorData,setAdCreatorData] = useState({
+  title: "",
+  description: "",
+  price: "",
+  username: "",
+  phoneNumber: "",
+  itemCategory: "",
+  location: "",
+  photo1: "",
+  photo2: "",
+  photo3: "",
+  photo4: "" })
   const [state, setState] = React.useState({
     checkedA: true,
   });
@@ -147,7 +181,7 @@ const AdFormCreator = ()=>{
              <Typography variant = "body1" className = {classes.heading} >
               SELECTED CATEGORY</Typography>
               </div>
-              <form>
+              <form onSubmit= {(evt)=> onAdCreatorDataSubmit(evt)}>
                 
               <div style = {{border: "1px solid lightgrey",padding: "25px",width: "900px"}}>
               <Typography variant = "body1 " className = {classes.heading} >
@@ -156,9 +190,10 @@ const AdFormCreator = ()=>{
               Make*</Typography>      
               <FormControl >
               <NativeSelect
-                id="demo-customized-select-native"
-                value={age}
-                onChange={handleChange}
+                name = "itemCategory"
+                value={adCreatorData.itemCategory}
+                onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+               
                 input={<BootstrapInput />}
               >
           <option aria-label="None" value="" />
@@ -166,29 +201,35 @@ const AdFormCreator = ()=>{
         </NativeSelect>
       </FormControl>
       <TextField className = {classes.textfield}
+          name = "title"
           label="Ad title*"
           type="text"
           variant="outlined"
           helperText="Mention the key features of your item (e.g. brand, model, age, type)"
-        
-        />
+          value = {adCreatorData.title}
+          onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+       />
         <div style = {{marginTop: "20px"}}>
         <Typography variant = "body2" >
           Condition*</Typography>      
         <div style ={{display: "flex",flexDirection:"row", width: "150px", justifyContent: "space-evenly"}}>
-        <Button variant="outlined" className= {classes.btn}>Old</Button>
-        <Button variant="outlined" className= {classes.btn}>New</Button>
+        <Button variant="outlined" onClick = {()=>setAdCreatorData({...adCreatorData,condition: "old"})} className= {classes.btn}>Old</Button>
+        <Button variant="outlined" onClick = {()=>setAdCreatorData({...adCreatorData,condition: "new"})} className= {classes.btn}>New</Button>
         </div>
         </div>
         <div style = {{marginTop: "20px"}}>
         <TextField className = {classes.multiline}
+          name = "description"
           id="outlined-multiline-static"
           label="Description *"
           multiline
           rows={5}
           variant="outlined"
           helperText = "A minimum length of 20 characters is required. Please edit the field."
-        />
+          value = {adCreatorData.description}
+          onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+          
+       />
         </div>
        
         
@@ -200,31 +241,38 @@ const AdFormCreator = ()=>{
           label="Price *"
           type="number"
           variant="outlined"
-        
+          name = "price"
+          value = {adCreatorData.price}
+          onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+                     
         />
         </div>
         <div style = {{border: "1px solid lightgrey",padding: "25px",width: "900px"}}>
         <Typography variant = "body1" className = {classes.heading} >UPLOAD YOUR 4 PHOTOS</Typography>
          <label htmlFor="icon-button-file">
-         <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+         <input accept="image/*"  name = "photo1"className={classes.input} id="icon-button-file" type="file"
+         onChange= {(evt)=>photoHandler(evt)} />
         <IconButton color="primary" aria-label="upload picture" component="span">
           <AddAPhotoIcon style = {{fontSize:"62px",color:"#478582",border: "2px solid #478582",padding:"20px"}}/>
         </IconButton>
       </label>
-      <label htmlFor="icon-button-file">
-         <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file-2">
+         <input accept="image/*" className={classes.input} id="icon-button-file-2" name = "photo2"  type="file"
+         onChange= {(evt)=>photoHandler(evt)} />
+        <IconButton color="primary" aria-label="upload picture" component="span" >
+          <AddAPhotoIcon style = {{fontSize:"62px",color:"#478582",border: "2px solid #478582",padding:"20px"}}/>
+        </IconButton>
+      </label>
+      <label htmlFor="icon-button-file-3">
+         <input accept="image/*" className={classes.input} id="icon-button-file-3"  type="file" name = "photo3"
+         onChange= {(evt)=>photoHandler(evt)} />
         <IconButton color="primary" aria-label="upload picture" component="span">
           <AddAPhotoIcon style = {{fontSize:"62px",color:"#478582",border: "2px solid #478582",padding:"20px"}}/>
         </IconButton>
       </label>
-      <label htmlFor="icon-button-file">
-         <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-        <IconButton color="primary" aria-label="upload picture" component="span">
-          <AddAPhotoIcon style = {{fontSize:"62px",color:"#478582",border: "2px solid #478582",padding:"20px"}}/>
-        </IconButton>
-      </label>
-      <label htmlFor="icon-button-file">
-         <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file-4">
+         <input accept="image/*" className={classes.input} id="icon-button-file-4"  type="file" name= "photo4" 
+         onChange= {(evt)=>photoHandler(evt)} />
         <IconButton color="primary" aria-label="upload picture" component="span">
           <AddAPhotoIcon style = {{fontSize:"62px",color:"#478582",border: "2px solid #478582",padding:"20px"}}/>
         </IconButton>
@@ -237,32 +285,40 @@ const AdFormCreator = ()=>{
               Location *</Typography>      
               <FormControl >
               <NativeSelect
-                id="demo-customized-select-native"
-                value={age}
-                onChange={handleChange}
+                name = "location"
+                value={adCreatorData.location}
+                onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+                
                 input={<BootstrapInput />}
               >
           <option aria-label="None" value="" />
-    {items.map((category,index)=><option key = {index} value = {category}>{category}</option>)}
+    {["Karachi","Lahore","Islamabad","Hyderabad","KPK","Gwaddar","Faisalabad","Muree","Quetta"].map((category,index)=><option key = {index} value = {category}>{category}</option>)}
         </NativeSelect>
       </FormControl>
         </div>
         <div style = {{border: "1px solid lightgrey",padding: "25px",width: "900px"}}>
         <Typography variant = "body1" className = {classes.heading}>REVIEW YOUR DETAILS</Typography>
         <TextField className = {classes.textfield}
-          label="Name *"
+          name = "username"
+          label="username *"
           type="text"
           variant="outlined"
+          value = {adCreatorData.username}
+          onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+          
         
         />
         <Typography variant = "h6" className ={classes.heading}>
         Let's verify your account
         </Typography>
         <TextField className = {classes.textfield}
+          name = "phoneNumber" 
           label="Phone Number *"
           type="number"
           variant="outlined"
-        
+          value = {adCreatorData.phoneNumber}
+          onChange = {(evt)=>setAdCreatorData({...adCreatorData,[evt.target.name]:evt.target.value})}
+          
         />
         <div style = {{display: "flex",justifyContent: "space-between",width:"320px",alignItems:"center"}}>
         <Typography variant = "body1">
@@ -279,7 +335,7 @@ const AdFormCreator = ()=>{
         </div>
         </div>
         <div style = {{border: "1px solid lightgrey",padding: "25px",width: "900px"}}>
-        <Button variant="contained" size="large"  style={{color : "#478582"}}>
+        <Button variant="contained" size="large" type ="submit"  style={{color : "#478582"}}>
           POST Now
         </Button> 
           </div>
