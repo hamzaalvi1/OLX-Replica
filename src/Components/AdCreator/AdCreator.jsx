@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       maxWidth: 600,
       border:  "1px solid lightgrey",
-      padding: theme.spacing(1)
+      padding: theme.spacing(2)
     },
     nested: {
       paddingLeft: theme.spacing(4),
