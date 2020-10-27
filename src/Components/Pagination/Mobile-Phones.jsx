@@ -13,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
         width: "auto",
         justifyContent: "space-between",
     
-    }
+    },
+    title:{fontWeight: "bold",margin: "5px",color: "#003554",fontSize: "25px"},
+
   }));
 
 const MobilePhones = ()=>{
@@ -25,7 +27,7 @@ const MobilePhones = ()=>{
     
     return(
         <div style = {{margin: "20px"}}>
-            <Typography variant = "h5">Mobile Phones in Karachi</Typography>
+            <Typography variant = "h5" className = {classes.title}>Mobile Phones in Karachi</Typography>
             <div className = {classes.flexContainer} >
              <NestedList nestedList = {nestedCategory} />
              <NestedCards/>
