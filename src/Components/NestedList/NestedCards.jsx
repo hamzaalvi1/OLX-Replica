@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
                 <Grid key={value} item>
                   <Paper className={classes.paper} variant="outlined" >
                       <div style={{display:'flex',alignItems:"start",justifyContent:"flex-start"}}> 
-                      <img src ="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-11-2.jpg" className ={classes.image}/>   
+                      <img src ="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-11-2.jpg" alt = "ad-title" className ={classes.image}/>   
                       <IconButton aria-label="FavouriteIcon" className={classes.margin}
                       onClick = {()=>setToggleFavourite(!toggleFavourite)}>
                        {toggleFavourite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}

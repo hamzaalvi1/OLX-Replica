@@ -12,7 +12,8 @@ import IconButton from "@material-ui/core/IconButton"
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import {FireStore} from "../FireBase/firebase"
-
+import {is_Category} from "../StateManagement/ActionCreator" 
+import {useDispatch} from "react-redux"
 
 const BootstrapInput = withStyles((theme) => ({
     
@@ -114,16 +115,17 @@ const useStyles = makeStyles((theme) => ({
 
 const AdFormCreator = ()=>{
     const classes = useStyles();
+    const dispatch = useDispatch()
     const gblContext = useContext(GlobalContext)
-    const {setIsCategory,MenuList} = gblContext
+    const {MenuList} = gblContext
     const params = useParams()
     const {category} = params
     const photoHandler =(evt)=>{
       evt.persist();
-      let reader = new FileReader();
       let file = evt.target.files[0];   
+      let reader = new FileReader();
       reader.onloadend = ()=>{
-        setAdCreatorData({...adCreatorData,[evt.target.name]:file.name})
+        setAdCreatorData({...adCreatorData,[evt.target.name]:reader.result})
       }    
      reader.readAsDataURL(file)
     }
@@ -165,14 +167,15 @@ const AdFormCreator = ()=>{
     const {items} = nestedCategory 
     useEffect(()=>{
     if(category){
-        setIsCategory(category)
+        dispatch(is_Category(category))
     }
     else{
-        setIsCategory(null)
+        dispatch(is_Category(null))
+
     }
        
       
-    },[setIsCategory,category])
+    },[category,dispatch])
     return(
         <div style = {{display:"flex",flexDirection: "column",alignItems: "center",justifyContent: "center", padding: "20px"}}>
              <Typography variant = "h5" className = {classes.title}>

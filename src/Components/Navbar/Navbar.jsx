@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,8 +14,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import {useHistory,useLocation} from "react-router-dom";
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import {GlobalContext} from "../Context/GlobalState"
 import OLXlogo from "../../Assets/OLX.png"
+import {useSelector} from "react-redux"
 const useStyles = makeStyles((theme) => ({
 
   title:{
@@ -119,8 +119,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = ()=>  {
-  const gblContext = useContext(GlobalContext)
-  const  {isCategory} = gblContext
+ 
+  const is_Category = useSelector(state=> state.categoryReducer)
   const history = useHistory()
   const classes = useStyles();
   const location = useLocation()
@@ -132,16 +132,16 @@ const Navbar = ()=>  {
   return (
     <div className={classes.root}>
       <AppBar position="static" style = {{backgroundColor: "#f7f9f8",height: "70px"}}> 
-      <div style={location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${isCategory}` ? mainToolbarStyling : null}>
+      <div style={location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${is_Category}` ? mainToolbarStyling : null}>
       
         <Toolbar>
-        {location.pathname === "/AdCreator" || location.pathname === `/AdCreator/${isCategory}` ? 
+        {location.pathname === "/AdCreator" || location.pathname === `/AdCreator/${is_Category}` ? 
           <div>
           <IconButton onClick = {()=>history.goBack()}>
           <KeyboardBackspaceIcon className = {classes.backBtn} />
           </IconButton></div> : null}        
           <img src = {OLXlogo} style = {{cursor: "pointer"}} width ="50px" alt = "olx" onClick = {()=>history.push("/")}/>
-          { location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${isCategory}` ?
+          { location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${is_Category}` ?
          <div className = {classes.selectParent}>
          <SearchIcon style = {{color: "#003034",}}fontSize = "large"/>
         <NativeSelect className = {classes.select}
@@ -157,7 +157,7 @@ const Navbar = ()=>  {
           <option value={30}>Thirty</option>
         </NativeSelect> 
           </div> : null }
-           {location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${isCategory}` ? 
+           {location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${is_Category}` ? 
           <div className={classes.search}>
                                
             <InputBase
@@ -173,7 +173,7 @@ const Navbar = ()=>  {
         
           </div>
           :null}
-          {location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${isCategory}` ? 
+          {location.pathname !== "/AdCreator" && location.pathname !== `/AdCreator/${is_Category}` ? 
           <div style={{marginLeft: "22px"}}>         
           <IconButton   >
                 <ChatBubble className = {classes.notifyIcons}  />

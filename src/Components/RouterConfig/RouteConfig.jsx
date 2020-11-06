@@ -12,7 +12,7 @@ import BooksAndSports from "../Pagination/BooksAndSports"
 import Kids from "../Pagination/Kids"
 import AdCreator from "../AdCreator/AdCreator"
 import AdFormCreator from "../AdCreator/AdFormCreator"
-
+import ItemPage from "../ItemPage/ItemPage"
 
 
 
@@ -24,6 +24,7 @@ const RouteConfig  = ()=>{
         <div>
          <Switch>   
           <Route exact path = "/" component = {AllSellItems} />
+          <Route path = "/Item/:item" component = {ItemPage}/>
           <Route  path = "/Electronics" component = {Electronics} />
           <Route  path = "/Property" component = {Property} />
           <Route  path = "/Furnitures" component ={Furnitures} />
