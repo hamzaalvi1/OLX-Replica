@@ -7,6 +7,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import {useSelector} from "react-redux"
+import {Link} from "react-router-dom"
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -41,6 +42,7 @@ const AllSellItems = ()=>{
              <Grid container justify="center" spacing={2}>
               {ads_Arr.length !== 0 ? ads_Arr.map((ads) => (
             <Grid key={ads.title} item>
+              <Link to = {`/Item/${ads.title}`}>
               <Paper className={classes.paper} variant="outlined" >
                   <div style={{display:'flex',alignItems:"start",justifyContent:"flex-start"}}> 
                   <img src ={ads.photo1} alt = {ads.title} className ={classes.image}/>   
@@ -63,6 +65,7 @@ const AllSellItems = ()=>{
                   </div>
                   
                 </Paper>
+                </Link>
             </Grid>
           )): <Typography variant = "h5"> NO ADS AVAILABLE</Typography>}
         </Grid>

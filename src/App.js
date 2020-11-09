@@ -18,7 +18,10 @@ import {GlobalProvider} from "./Components/Context/GlobalState"
 
 function App(props) {
   const dispatch = useDispatch()
+
   const is_Category = useSelector(state=> state.categoryReducer)
+  console.log(is_Category)
+  console.log(props.location)
   useEffect(()=>{
     dispatch(asyncAdsFetch())
   },[dispatch])
@@ -27,9 +30,9 @@ function App(props) {
     <div className="App" >
           <Navbar/>   
           {props.location.pathname !== "/AdCreator" && props.location.pathname !== `/AdCreator/${is_Category}`  ? <AllCategories/> : null}
-          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${is_Category}` ? <BrandImage/> : null}
+          {(props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${is_Category}`) &&  props.location.pathname !== `/Item/${is_Category}` ? <BrandImage/> : null}
           <RouteConfig/>
-          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${is_Category}` ? <BrandFooter/>: null}
+          {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${is_Category}` &&  props.location.pathname !== `/Item/${is_Category}` ? <BrandFooter/>: null}
           {props.location.pathname !== "/AdCreator"  && props.location.pathname !== `/AdCreator/${is_Category}` ?<FooterNavigation/>:null}
           <Footer/> 
       
